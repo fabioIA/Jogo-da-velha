@@ -58,8 +58,11 @@ void printTabuleiro()
     }
 }
 
-void jogada(int number, int jog)
+int jogada(int number, int jog)
 {
+    if(number > 9 or number < 1)
+        return 0;
+
     int x, y;
 
     if(number < 4)
@@ -82,6 +85,10 @@ void jogada(int number, int jog)
         tabuleiro[y][x] = 'X';
     else if(isdigit(tabuleiro[y][x]))
         tabuleiro[y][x] = 'O';
+    else
+        return 0;
+    
+    return 1;
 }
 
 int main()
@@ -96,10 +103,18 @@ int main()
 
         while(verifica() == 0)
         {
-            cout<<endl<<"Jogador 1 (X), escolha uma posição: ";
-            cin>>jog;
+            do
+            {
+                cout<<endl<<"Jogador 1 (X), escolha uma posição: ";
+                cin>>jog;
 
-            jogada(jog, 1);
+                if(jogada(jog, 1))
+                    break;
+                else
+                    cout<<endl<<"Posição inválida ou já ocupada! Escolha outra posição.";
+            } 
+            while(true);
+
             jog = 1;
 
             printTabuleiro();
@@ -107,10 +122,18 @@ int main()
             if(verifica() != 0)
                 break;
 
-            cout<<endl<<"Jogador 2 (O), escolha uma posição: ";
-            cin>>jog;
+            do
+            {
+                cout<<endl<<"Jogador 2 (O), escolha uma posição: ";
+                cin>>jog;
 
-            jogada(jog, 0);
+                if(jogada(jog, 0))
+                    break;
+                else
+                    cout<<endl<<"Posição inválida ou já ocupada! Escolha outra posição.";
+            } 
+            while(true);
+
             jog = 2;
 
             printTabuleiro();
