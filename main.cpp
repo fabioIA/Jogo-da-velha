@@ -6,20 +6,6 @@ vector<vector <char>> tabuleiro;
 
 int verifica()
 {
-    int count = 0;
-
-    for(auto line : tabuleiro)
-    {
-        for(auto column : line)
-        {
-            if(isdigit(column)) 
-                count++;
-        }
-    }
-    
-    if(count == 0)
-        return 2;
-    
     for(auto el : tabuleiro)
     {
         if(el[0] == el[1] and el[0] == el[2])
@@ -36,6 +22,18 @@ int verifica()
         return true;
     else if(tabuleiro[0][2] == tabuleiro[1][1] and tabuleiro[0][2] == tabuleiro[2][0])
         return 1;
+
+    int count = 0;
+    for(auto line : tabuleiro)
+    {
+        for(auto column : line)
+        {
+            if(isdigit(column)) 
+                count++;
+        }
+    }
+    if(count == 0)
+        return 2;
 
     return 0;
 }
